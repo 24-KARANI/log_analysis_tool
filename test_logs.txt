@@ -1,0 +1,38 @@
+[2025-07-29T20:20:27+0300] [ALPM-SCRIPTLET] ==> Starting build: '6.15.8-arch1-1'
+[2025-07-29T20:20:27+0300] [ALPM-SCRIPTLET]   -> Running build hook: [base]
+[2025-07-29T20:20:28+0300] [ALPM-SCRIPTLET]   -> Running build hook: [udev]
+[2025-07-29T20:20:28+0300] [ALPM-SCRIPTLET]   -> Running build hook: [microcode]
+[2025-07-29T20:20:28+0300] [ALPM-SCRIPTLET]   -> Running build hook: [modconf]
+[2025-07-29T20:20:28+0300] [ALPM-SCRIPTLET]   -> Running build hook: [kms]
+[2025-07-29T20:20:28+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'ast'
+[2025-07-29T20:20:34+0300] [ALPM-SCRIPTLET]   -> Running build hook: [keyboard]
+[2025-07-29T20:20:34+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'xhci_pci_renesas'
+[2025-07-29T20:20:35+0300] [ALPM-SCRIPTLET]   -> Running build hook: [keymap]
+[2025-07-29T20:20:35+0300] [ALPM-SCRIPTLET]   -> Running build hook: [consolefont]
+[2025-07-29T20:20:35+0300] [ALPM-SCRIPTLET] ==> WARNING: consolefont: no font found in configuration
+[2025-07-29T20:20:35+0300] [ALPM-SCRIPTLET]   -> Running build hook: [block]
+[2025-07-29T20:20:35+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'qed'
+[2025-07-29T20:20:35+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'qla1280'
+[2025-07-29T20:20:36+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'bfa'
+[2025-07-29T20:20:36+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'aic94xx'
+[2025-07-29T20:20:36+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'wd719x'
+[2025-07-29T20:20:36+0300] [ALPM-SCRIPTLET] ==> WARNING: Possibly missing firmware for module: 'qla2xxx'
+[2025-07-29T20:20:38+0300] [ALPM-SCRIPTLET]   -> Running build hook: [filesystems]
+[2025-07-29T20:20:38+0300] [ALPM-SCRIPTLET]   -> Running build hook: [fsck]
+[2025-07-29T20:20:40+0300] [ALPM-SCRIPTLET] ==> Generating module dependencies
+[2025-07-29T20:20:40+0300] [ALPM-SCRIPTLET] ==> Creating zstd-compressed initcpio image: '/boot/initramfs-linux-fallback.img'
+[2025-07-29T20:20:41+0300] [ALPM-SCRIPTLET]   -> Early uncompressed CPIO image generation successful
+[2025-07-29T20:20:41+0300] [ALPM-SCRIPTLET] ==> Initcpio image generation successful
+[2025-07-29T20:20:41+0300] [ALPM] running 'detect-old-perl-modules.hook'...
+[2025-07-29T20:20:41+0300] [ALPM] running 'glib-compile-schemas.hook'...
+[2025-07-29T20:20:42+0300] [ALPM] running 'gtk-update-icon-cache.hook'...
+[2025-07-29T20:20:42+0300] [ALPM] running 'texinfo-install.hook'...
+[2025-07-29T20:20:44+0300] [ALPM] running 'update-desktop-database.hook'...
+[2025-07-29T20:21:05+0300] [PACMAN] Running 'pacman -S neofetch'
+[2025-07-29T20:22:24+0300] [PACMAN] Running 'pacman --upgrade --noconfirm -- /home/karani/.cache/paru/clone/neofetch/neofetch-7.1.0-2-any.pkg.tar.zst'
+[2025-07-29T20:22:24+0300] [ALPM] transaction started
+[2025-07-29T20:22:24+0300] [ALPM] installed neofetch (7.1.0-2)
+[2025-07-29T20:22:24+0300] [ALPM] transaction completed
+[2025-07-29T20:22:24+0300] [ALPM] running '30-systemd-update.hook'...
+[2025-07-29T20:22:24+0300] [PACMAN] Running 'pacman --database --asexplicit -- neofetch'
+[2025-07-29T20:42:50+0300] [PACMAN] Running 'pacman -S anonsurf'
