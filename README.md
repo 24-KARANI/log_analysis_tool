@@ -1,4 +1,7 @@
-📊 Log Analyzer
+📊
+log_analysis_tool
+Python License
+
 A powerful Python-based tool for parsing, classifying, and aggregating Linux system logs. Monitor your system activity by collecting logs from multiple sources, classifying events, and storing results locally or in MongoDB.
 
 ✨ Features
