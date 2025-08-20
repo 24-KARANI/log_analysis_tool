@@ -1,144 +1,124 @@
-📊
-log_analysis_tool
-Python License
+# 📊 Log Analysis Tool
+[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/24-KARANI/log_analysis_tool)
 
-A powerful Python-based tool for parsing, classifying, and aggregating Linux system logs. Monitor your system activity by collecting logs from multiple sources, classifying events, and storing results locally or in MongoDB.
+A powerful Python tool for parsing, classifying, and aggregating Linux system logs. This tool provides a comprehensive overview of system activity by collecting logs from multiple sources, classifying events into structured categories, and storing the results locally or in a MongoDB database.
 
-✨ Features
-🔍 Log Parsers
-Pacman logs → Tracks package installations and updates
+---
 
-Journalctl logs → Monitors sudo usage and system errors
+### ✨ Features
 
-Audit logs → Records login attempts, authentication events, and access violations
+#### 🔍 Log Parsers
+The tool includes dedicated parsers for a variety of critical system logs:
+- **`pacman.log`**: Tracks package installations and removals.
+- **`journalctl`**: Monitors `sudo` command usage and system-level errors from the systemd journal.
+- **`audit.log`**: Records security-relevant events like login attempts, authentication successes/failures, and access control violations.
+- **`who` & `last`**: Gathers information on current and historical user login sessions.
 
-Login sessions → Tracks user logins (from who and last commands)
+#### 🏷️ Event Classification
+Each parsed log entry is intelligently categorized for easy filtering and analysis. Key categories include:
+- `package_install`
+- `package_removals`
+- `sudo_usage`
+- `system_error`
+- `login_attempt`
+- `auth_event`
+- `access_violation`
+- `user_login`
 
-🏷️ Classification
-Each log entry is intelligently categorized into:
+#### 📈 Statistics Aggregation
+Generate meaningful summaries from the classified logs to identify trends and anomalies:
+- **Sudo Usage**: Count of `sudo` commands executed per user.
+- **Package Management**: Frequency of package installations and removals.
+- **Login Activity**: Number of login attempts and successful logins per user.
+- **System Errors**: Tally of errors grouped by the generating process (e.g., `kernel`, `systemd`).
+- **Security Events**: Count of authentication events and access violations.
 
-package_install
+#### 💾 Flexible Storage
+- **Local Files**: All classified logs and aggregated statistics are saved as timestamped JSON files in the `results/` directory.
+- **MongoDB Integration**: Store structured log data in a MongoDB collection, with duplicate prevention based on entry content to ensure data integrity.
 
-sudo_usage
+---
 
-system_error
-
-auth_event
-
-And more...
-
-📈 Aggregation
-Generate meaningful statistics from your logs:
-
-Installs per package
-
-Sudo usage per user
-
-Login attempts over time
-
-System error frequency
-
-💾 Storage Options
-Save structured JSON results to local files
-
-Insert into MongoDB with duplicate prevention
-
-Flexible output formats
-
-⚙️ Automation
-Easily schedule weekly runs via:
-
-cron jobs
-
-systemd timers
-
-📂 Project Structure
-text
-log_analyzer/
-├── analyze.py          # Main entry point
-├── utils.py            # Shared utility functions
-├── classification.py   # Event classification logic
-├── aggregation.py      # Aggregation of statistics
-├── parsers/            # Individual log parsers
-│   ├── pacman.py
-│   ├── journal.py
+### 📂 Project Structure
+```text
+log_analysis_tool/
+├── analyze.py          # Main script to run the log collection and analysis
+├── classification.py   # Logic for categorizing log entries
+├── aggregation.py      # Functions for aggregating statistics
+├── utils.py            # Utility functions like file loading
+├── parsers/              # Directory for individual log parsers
 │   ├── audit.py
-│   └── login.py
-├── results/            # JSON output files (created at runtime)
+│   ├── journal.py
+│   ├── login.py
+│   └── pacman.py
 └── README.md
-⚡ Requirements
-System
-Linux (tested on Arch Linux, but adaptable to other distros)
+```
 
-Python 3.8+
+---
 
-MongoDB (optional, for database storage)
+### ⚙️ Requirements
+- **System**: Linux (tested on Arch Linux)
+- **Python**: 3.8+
+- **Database**: MongoDB (Required for storing results)
+- **Python Dependencies**:
+  - `pymongo`
 
-Python Dependencies
-Install via pip:
+Install the required Python package using pip:
+```bash
+pip install pymongo
+```
 
-bash
-pip install -r requirements.txt
-Typical dependencies include:
+### 🚀 Quick Start
 
-pymongo
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/24-karani/log_analysis_tool.git
+    cd log_analysis_tool
+    ```
 
-dnspython (if using MongoDB Atlas)
+2.  **Run the Analyzer**
+    Execute the main script. Ensure your MongoDB instance is running.
+    ```bash
+    python analyze.py
+    ```
+    > **Note**: Some log files (e.g., `/var/log/audit/audit.log`) require root privileges to read. You may need to run the script with `sudo`:
+    > ```bash
+    > sudo python analyze.py
+    > ```
 
-🚀 Quick Start
-1. Clone Repository
-bash
-git clone https://github.com/yourusername/log_analyzer.git
-cd log_analyzer
-2. Run the Analyzer
-Run locally (no database):
+3.  **Review the Output**
+    -   **Local JSON Files**: Check the `results/` directory for timestamped files containing the classified logs and aggregated statistics.
+    ```text
+    results/
+    ├── classified_2023-10-27_10-30-00.json
+    └── stats_2023-10-27_10-30-00.json
+    ```
+    -   **MongoDB**: The script inserts data into the `log_analyzer` database.
+        -   Classified events are stored in the `classified` collection.
+        -   Aggregated statistics are stored in the `stats` collection.
 
-bash
-python analyze.py
-Run with MongoDB storage:
+---
 
-bash
-python analyze.py --db
-3. Output
-Classified logs and aggregated statistics are saved to JSON in the results/ folder:
+### 🔄 Automation with Cron
 
-text
-results/
-├── classified_2025-08-19_19-45-12.json
-└── stats_2025-08-19_19-45-12.json
-If MongoDB is enabled, entries are inserted into the logs database, events collection.
+To run the analysis automatically (e.g., weekly), you can set up a cron job.
 
-🔄 Automation
-Cron Job (Weekly Execution)
-bash
-crontab -e
-Add the following line to run every Sunday at midnight:
+1.  Open your crontab for editing:
+    ```bash
+    sudo crontab -e
+    ```
 
-text
-0 0 * * 0 /path/to/venv/bin/python /path/to/log_analyzer/analyze.py
-Systemd Timer
-For more flexibility and better logging, consider using systemd timers (configuration examples available in the wiki).
+2.  Add the following line to execute the script every Sunday at 2:00 AM. Adjust the paths to your Python executable and the `analyze.py` script.
+    ```
+    0 2 * * 0 /usr/bin/python /path/to/log_analysis_tool/analyze.py
+    ```
 
-🛠️ Permissions Note
-Some logs (e.g., /var/log/audit/audit.log) require root permissions. Run with:
+---
 
-bash
-sudo /path/to/venv/bin/python analyze.py
-Alternatively, adjust log file permissions for your user to avoid using sudo.
+### 🤝 Contributing
 
-🧩 Future Enhancements
-Email or Slack alerts for critical log events
+Contributions are welcome! If you have suggestions for improvements, new features, or find any bugs, please feel free to open an issue or submit a pull request.
 
-Web dashboard for log visualization
+### 📄 License
 
-Support for additional log sources (nginx, sshd, etc.)
-
-Real-time log monitoring capabilities
-
-Advanced filtering and search capabilities
-
-🤝 Contributing
-We welcome contributions! Please feel free to submit pull requests, open issues, or suggest new features.
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
