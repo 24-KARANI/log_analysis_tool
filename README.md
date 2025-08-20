@@ -1,5 +1,5 @@
 # 📊 Log Analysis Tool
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/24-KARANI/log_analysis_tool)
+
 
 A powerful Python tool for parsing, classifying, and aggregating Linux system logs. This tool provides a comprehensive overview of system activity by collecting logs from multiple sources, classifying events into structured categories, and storing the results locally or in a MongoDB database.
 
