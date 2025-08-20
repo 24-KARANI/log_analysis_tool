@@ -1,33 +1,56 @@
-Log Analyzer
-
-A Python-based tool for parsing, classifying, and aggregating Linux system logs.
-The project is designed to help users monitor system activity by collecting logs from multiple sources, classifying events (e.g., package installs, sudo usage, login attempts), and storing results locally or in a MongoDB database.
+📊 Log Analyzer
+A powerful Python-based tool for parsing, classifying, and aggregating Linux system logs. Monitor your system activity by collecting logs from multiple sources, classifying events, and storing results locally or in MongoDB.
 
 ✨ Features
+🔍 Log Parsers
+Pacman logs → Tracks package installations and updates
 
-Log Parsers:
+Journalctl logs → Monitors sudo usage and system errors
 
-Pacman logs → Tracks package installs
+Audit logs → Records login attempts, authentication events, and access violations
 
-Journalctl logs → Tracks sudo usage and system errors
+Login sessions → Tracks user logins (from who and last commands)
 
-Audit logs → Tracks login attempts, authentication events, and access violations
+🏷️ Classification
+Each log entry is intelligently categorized into:
 
-Login sessions → Tracks user logins (from who and last)
+package_install
 
-Classification: Each log entry is classified into categories like package_install, sudo_usage, system_error, auth_event, etc.
+sudo_usage
 
-Aggregation: Aggregates classified logs into meaningful statistics (e.g., installs per package, sudo usage per user).
+system_error
 
-Storage Options:
+auth_event
 
-Save structured JSON results into a results/ folder
+And more...
 
-Insert logs into a local MongoDB database with duplicate prevention
+📈 Aggregation
+Generate meaningful statistics from your logs:
 
-Automation: Can be scheduled to run weekly via cron or systemd timer.
+Installs per package
+
+Sudo usage per user
+
+Login attempts over time
+
+System error frequency
+
+💾 Storage Options
+Save structured JSON results to local files
+
+Insert into MongoDB with duplicate prevention
+
+Flexible output formats
+
+⚙️ Automation
+Easily schedule weekly runs via:
+
+cron jobs
+
+systemd timers
 
 📂 Project Structure
+text
 log_analyzer/
 ├── analyze.py          # Main entry point
 ├── utils.py            # Shared utility functions
@@ -40,9 +63,8 @@ log_analyzer/
 │   └── login.py
 ├── results/            # JSON output files (created at runtime)
 └── README.md
-
 ⚡ Requirements
-
+System
 Linux (tested on Arch Linux, but adaptable to other distros)
 
 Python 3.8+
@@ -50,74 +72,70 @@ Python 3.8+
 MongoDB (optional, for database storage)
 
 Python Dependencies
-
 Install via pip:
 
+bash
 pip install -r requirements.txt
-
-
 Typical dependencies include:
 
 pymongo
 
 dnspython (if using MongoDB Atlas)
 
-🚀 Usage
+🚀 Quick Start
 1. Clone Repository
+bash
 git clone https://github.com/yourusername/log_analyzer.git
 cd log_analyzer
+2. Run the Analyzer
+Run locally (no database):
 
-2. Run Analyzer
-
-Run locally (no DB):
-
+bash
 python analyze.py
-
-
 Run with MongoDB storage:
 
+bash
 python analyze.py --db
-
 3. Output
-
 Classified logs and aggregated statistics are saved to JSON in the results/ folder:
 
+text
 results/
 ├── classified_2025-08-19_19-45-12.json
 └── stats_2025-08-19_19-45-12.json
-
-
 If MongoDB is enabled, entries are inserted into the logs database, events collection.
 
-🔄 Automating Weekly Runs
-
-You can automate weekly execution with cron:
-
+🔄 Automation
+Cron Job (Weekly Execution)
+bash
 crontab -e
+Add the following line to run every Sunday at midnight:
 
-
-Add:
-
+text
 0 0 * * 0 /path/to/venv/bin/python /path/to/log_analyzer/analyze.py
+Systemd Timer
+For more flexibility and better logging, consider using systemd timers (configuration examples available in the wiki).
 
+🛠️ Permissions Note
+Some logs (e.g., /var/log/audit/audit.log) require root permissions. Run with:
 
-This runs every Sunday at midnight.
-
-Or with systemd timers for more flexibility.
+bash
+sudo /path/to/venv/bin/python analyze.py
+Alternatively, adjust log file permissions for your user to avoid using sudo.
 
 🧩 Future Enhancements
-
 Email or Slack alerts for critical log events
 
 Web dashboard for log visualization
 
 Support for additional log sources (nginx, sshd, etc.)
 
-⚠️ Notes
+Real-time log monitoring capabilities
 
-Some logs (e.g., /var/log/audit/audit.log) require root permissions. Run with:
+Advanced filtering and search capabilities
 
-sudo /path/to/venv/bin/python analyze.py
+🤝 Contributing
+We welcome contributions! Please feel free to submit pull requests, open issues, or suggest new features.
 
-
-To avoid sudo, you can adjust log file permissions for your user.
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
