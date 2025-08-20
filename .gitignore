@@ -28,7 +28,4 @@ venv/
 env/
 
 # My own project-specific files
-test_log.txt
-test_audit.txt
-test_logins.txt
-test_failed_logins.txt
+results/
