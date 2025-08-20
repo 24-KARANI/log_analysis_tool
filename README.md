@@ -1,5 +1,6 @@
 # 📊 Log Analysis Tool
-
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-5.0%2B-green)
 
 A powerful Python tool for parsing, classifying, and aggregating Linux system logs. This tool provides a comprehensive overview of system activity by collecting logs from multiple sources, classifying events into structured categories, and storing the results locally or in a MongoDB database.
 
